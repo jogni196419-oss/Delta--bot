@@ -1,0 +1,23 @@
+import os, time
+from delta_rest_client import DeltaExchangeClient, OrderType
+
+API_KEY = os.getenv("DELTA_API_KEY")
+API_SECRET = os.getenv("DELTA_API_SECRET")
+
+client = DeltaExchangeClient(
+    base_url="https://api.india.delta.exchange",
+    api_key=API_KEY,
+    api_secret=API_SECRET
+)
+
+print("Bot Started... Waiting for signal")
+# અહીં તારું સ્ટ્રેટેજી લોજિક આવશે
+while True:
+    try:
+        # ઉદાહરણ: BTC નો ભાવ લેવો
+        ticker = client.get_ticker("BTCUSD")
+        print(f"BTC Price: {ticker['close']}")
+        time.sleep(60)
+    except Exception as e:
+        print(f"Error: {e}")
+        time.sleep(10)
